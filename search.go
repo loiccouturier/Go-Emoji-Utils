@@ -77,7 +77,7 @@ func FindAll(input string) (detectedEmojis SearchResults) {
 		// Ignore any basic runes, we'll get funny partials
 		// that we dont care about
 		if len(hexKey) < 4 {
-			continue
+			//continue
 		}
 
 		previousKey := hexKey

@@ -118,3 +118,12 @@ func TestOutOfRangeError(t *testing.T) {
 	assert.Equal(t, "武柳昊雨", emojiRemoved, "There should be no emoji")
 
 }
+
+func TestSharpEmoji(t *testing.T) {
+	str := "😀 #️⃣ "
+
+	matches := emoji.FindAll(str)
+	totalUniqueEmoji := len(matches)
+
+	assert.Equal(t, 2, totalUniqueEmoji, "There should be 2 unique emoji")
+}
