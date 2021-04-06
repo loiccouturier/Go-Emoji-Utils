@@ -3,8 +3,8 @@ package tests
 import (
 	"testing"
 
+	emoji "github.com/loiccouturier/Go-Emoji-Utils"
 	"github.com/stretchr/testify/assert"
-	emoji "github.com/tmdvs/Go-Emoji-Utils"
 )
 
 func BenchmarkSearch(b *testing.B) {
@@ -126,4 +126,22 @@ func TestSharpEmoji(t *testing.T) {
 	totalUniqueEmoji := len(matches)
 
 	assert.Equal(t, 2, totalUniqueEmoji, "There should be 2 unique emoji")
+}
+
+func TestNoEmojiWithNumber(t *testing.T) {
+	str := "No Emoji 7 83 26"
+
+	matches := emoji.FindAll(str)
+	totalUniqueEmoji := len(matches)
+
+	assert.Equal(t, 0, totalUniqueEmoji, "There should be 0 unique emoji")
+}
+
+func TestEmojiNumberOne(t *testing.T) {
+	str := "Emoji 1️⃣ ( 1 )"
+
+	matches := emoji.FindAll(str)
+	totalUniqueEmoji := len(matches)
+
+	assert.Equal(t, 1, totalUniqueEmoji, "There should be 1 unique emoji")
 }

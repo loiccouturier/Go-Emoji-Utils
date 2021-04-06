@@ -63,6 +63,7 @@ func FindAll(input string) (detectedEmojis SearchResults) {
 	detectedModifiers := map[int]bool{}
 
 	// Loop over each "word" in the string
+	runesLen := len(runes)
 	for index, r := range runes {
 
 		// If this index has been flaged as a modifier we do
@@ -73,16 +74,18 @@ func FindAll(input string) (detectedEmojis SearchResults) {
 
 		// Grab the initial hex value of this run
 		hexKey := utils.RunesToHexKey([]rune{r})
+		nextIndex := index + 1
 
 		// Ignore any basic runes, we'll get funny partials
 		// that we dont care about
 		if len(hexKey) < 4 {
-			//continue
+			if index == runesLen - 1 || len(utils.RunesToHexKey([]rune{runes[nextIndex]})) < 4 {
+				continue
+			}
 		}
 
 		previousKey := hexKey
 		potentialMatches := Emojis
-		nextIndex := index + 1
 
 		for {
 			// Search the Emoji definitions map to see if we have
