@@ -145,3 +145,12 @@ func TestEmojiNumberOne(t *testing.T) {
 
 	assert.Equal(t, 1, totalUniqueEmoji, "There should be 1 unique emoji")
 }
+
+func TestEmojiNumberOne1(t *testing.T) {
+	str := "Emoji É 1️⃣ ( 1 )"
+
+	matches := emoji.FindAll(str)
+	totalUniqueEmoji := len(matches)
+
+	assert.Equal(t, 1, totalUniqueEmoji, "There should be 1 unique emoji")
+}
